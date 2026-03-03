@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yiyang Zhao</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Noto Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-size: 16px;
+            line-height: 1.65;
+            color: #494e52;
+            background: #fff;
+        }
+
+        a { color: #52adc8; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+
+        /* ── Top Navigation Bar ── */
+        .masthead {
+            border-bottom: 1px solid #e0e0e0;
+            background: #fff;
+        }
+        .masthead-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 24px;
+        }
+        .site-title {
+            font-size: 1.1em;
+            font-weight: 700;
+            color: #494e52;
+            text-decoration: none;
+        }
+        .site-title:hover { color: #000; text-decoration: none; }
+        .nav-links { display: flex; gap: 24px; }
+        .nav-links a {
+            font-size: 0.88em;
+            font-weight: 700;
+            color: #494e52;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            padding: 4px 0;
+            border-bottom: 2px solid transparent;
+            transition: border-color 0.2s;
+        }
+        .nav-links a:hover {
+            color: #000;
+            text-decoration: none;
+            border-bottom-color: #494e52;
+        }
+
+        /* ── Page Layout: Sidebar + Content ── */
+        .page-wrapper {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            padding: 36px 24px 60px;
+            gap: 40px;
+        }
+
+        /* ── Sidebar ── */
+        .sidebar {
+            flex: 0 0 240px;
+            position: sticky;
+            top: 24px;
+            align-self: flex-start;
+        }
+        .author-avatar {
+            width: 100%;
+            border-radius: 6px;
+            margin-bottom: 14px;
+        }
+        .author-name {
+            font-size: 1.15em;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 4px;
+        }
+        .author-title {
+            font-size: 0.85em;
+            font-weight: 700;
+            color: #494e52;
+            margin-bottom: 4px;
+        }
+        .author-bio {
+            font-size: 0.82em;
+            color: #7a8288;
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+        .author-location {
+            font-size: 0.82em;
+            color: #7a8288;
+            margin-bottom: 10px;
+        }
+        .author-links {
+            list-style: none;
+            padding: 0;
+        }
+        .author-links li {
+            font-size: 0.82em;
+            margin-bottom: 8px;
+            color: #7a8288;
+        }
+        .author-links li a {
+            color: #494e52;
+        }
+        .author-links li a:hover { color: #000; }
+        .author-links svg,
+        .author-location svg {
+            width: 16px;
+            height: 16px;
+            vertical-align: -3px;
+            margin-right: 5px;
+            fill: #7a8288;
+        }
+
+        /* ── Main Content ── */
+        .main-content {
+            flex: 1;
+            min-width: 0;
+        }
+        .main-content h1 {
+            font-size: 1.6em;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .main-content h2 {
+            font-size: 1.25em;
+            font-weight: 700;
+            color: #333;
+            margin-top: 36px;
+            margin-bottom: 14px;
+            padding-bottom: 6px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .main-content p {
+            margin-bottom: 12px;
+        }
+        .main-content ul {
+            padding-left: 18px;
+            margin-bottom: 12px;
+        }
+        .main-content li {
+            margin-bottom: 10px;
+        }
+
+        .edu-item strong { color: #333; }
+        .edu-date { color: #7a8288; font-size: 0.9em; }
+        .service-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            gap: 12px;
+        }
+        .service-year {
+            font-size: 0.85em;
+            color: #7a8288;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .pub-item {
+            margin-bottom: 20px;
+            padding-bottom: 18px;
+            border-bottom: 1px solid #f0f0f0;
+            list-style: none;
+        }
+        .pub-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        .pub-title {
+            font-size: 1.05em;
+            font-weight: 700;
+            color: #333;
+            display: block;
+            margin-bottom: 4px;
+        }
+        .pub-title a {
+            color: #333;
+            text-decoration: none;
+        }
+        .pub-title a:hover {
+            color: #52adc8;
+            text-decoration: underline;
+        }
+        .pub-authors {
+            font-size: 0.92em;
+            color: #555;
+            margin-bottom: 4px;
+        }
+        .pub-venue {
+            font-size: 0.9em;
+            font-style: italic;
+            color: #7a8288;
+        }
+        .pub-tags {
+            margin-top: 5px;
+        }
+        .badge {
+            display: inline-block;
+            font-size: 0.73em;
+            font-weight: 700;
+            background: #eef7fa;
+            color: #52adc8;
+            border: 1px solid #c5e3ed;
+            border-radius: 3px;
+            padding: 1px 6px;
+            margin-right: 4px;
+            vertical-align: middle;
+        }
+        .badge-award {
+            background: #fdf6ec;
+            color: #d4910a;
+            border-color: #f0ddb0;
+        }
+        .pub-note {
+            font-size: 0.82em;
+            color: #7a8288;
+            margin-top: 10px;
+        }
+
+
+        /* ── Responsive ── */
+        @media (max-width: 720px) {
+            .page-wrapper {
+                flex-direction: column;
+                padding: 24px 16px 40px;
+            }
+            .sidebar {
+                flex: none;
+                width: 100%;
+                position: static;
+                text-align: center;
+                margin-bottom: 24px;
+            }
+            .author-avatar { width: 150px; }
+            .nav-links { gap: 14px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Top Navigation -->
+<nav class="masthead">
+    <div class="masthead-inner">
+        <a class="site-title" href="#">Yiyang Zhao</a>
+        <div class="nav-links">
+            <a href="#about">About</a>
+            <a href="#education">Education</a>
+            <a href="#experience">Experience</a>
+            <a href="#publications">Publications</a>
+            <a href="#awards">Awards</a>
+            <a href="#services">Services</a>
+
+        </div>
+    </div>
+</nav>
+
+<!-- Page Layout -->
+<div class="page-wrapper">
+
+    <!-- Left Sidebar -->
+    <aside class="sidebar">
+        <img class="author-avatar" src="cv.jpg" alt="Yiyang Zhao">
+        <div class="author-name">Yiyang Zhao</div>
+        <div class="author-title">Ph.D. Candidate</div>
+        <div class="author-bio">School of Microelectronics<br>State Key Laboratory of Integrated Chips and Systems</div>
+        <div class="author-location">
+            <svg viewBox="0 0 16 16"><path d="M8 0C4.96 0 2.5 2.46 2.5 5.5c0 4.13 5.5 10.5 5.5 10.5s5.5-6.37 5.5-10.5C13.5 2.46 11.04 0 8 0zm0 7.5a2 2 0 110-4 2 2 0 010 4z"/></svg>
+            Shanghai, China
+        </div>
+        <ul class="author-links">
+            <li>
+                <a href="https://www.fudan.edu.cn" target="_blank">
+                    <svg viewBox="0 0 16 16"><path d="M8 0L0 6h2v8h4V10h4v4h4V6h2L8 0zm0 2.5L13 6v7h-2v-4H5v4H3V6l5-3.5z"/></svg>
+                    Fudan University
+                </a>
+            </li>
+            <li>
+                <a href="mailto:yiyangzhao23@m.fudan.edu.cn">
+                    <svg viewBox="0 0 16 16"><path d="M0 4l8 5 8-5v8a2 2 0 01-2 2H2a2 2 0 01-2-2V4zm0-1.5A1.5 1.5 0 011.5 1h13A1.5 1.5 0 0116 2.5L8 7.5 0 2.5z"/></svg>
+                    E-mail
+                </a>
+            </li>
+            <li>
+                <a href="https://github.com/MarsH3107" target="_blank">
+                    <svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+                    GitHub
+                </a>
+            </li>
+        </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <h1 id="about">About Me</h1>
+        <p>I am currently a Ph.D. candidate at Fudan University, specializing in Electrical Engineering. My research focuses deeply on digital IC front-end design, as well as the automated design and optimization of RISC-V CPUs. I am actively seeking opportunities to apply my expertise in microarchitecture design space exploration and hardware optimization.</p>
+
+        <h2 id="education">Education</h2>
+        <ul>
+            <li class="edu-item">
+                <strong>Ph.D. in Electronic Information</strong> &mdash; Fudan University
+                <br><span class="edu-date">Sep 2023 &ndash; Present</span>
+            </li>
+            <li class="edu-item">
+                <strong>M.S. in Microelectronics and Solid-State Electronics</strong> &mdash; Wuhan University
+                <br><span class="edu-date">Sep 2020 &ndash; Jun 2023</span>
+            </li>
+            <li class="edu-item">
+                <strong>B.S. in Space Science and Technology (Elite Class)</strong> &mdash; Shandong University
+                <br><span class="edu-date">Sep 2016 &ndash; Jun 2020</span>
+            </li>
+        </ul>
+
+        <h2 id="experience">Internship</h2>
+        <ul>
+            <li class="edu-item">
+                <strong>ASIC Design Engineer Intern</strong> &mdash; Turing Core & Key Technologies Development Department, HiSilicon
+                <br><span class="edu-date">Jun 2022 &ndash; Sep 2022</span>
+            </li>
+        </ul>
+
+        <h2 id="publications">Publications</h2>
+        <ul style="padding-left: 0;">
+            <li class="pub-item">
+                <span class="pub-title">Learning the "Why": Causal-Aware Learning in Explainable and Efficient CPU Design Optimization</span>
+                <!-- No link: accepted, not yet published -->
+                <div class="pub-authors"><strong>Yiyang Zhao</strong>, Tianning Gao, Hongyang Pan, Liangji Wu, Yiming Wei, Zhaori Bi, Changhao Yan and Xuan Zeng</div>
+                <div class="pub-venue">2026 63rd ACM/IEEE Design Automation Conference (DAC)</div>
+                <div class="pub-tags"><span class="badge">Accepted</span> <span class="badge">CCF-A</span></div>
+            </li>
+            <li class="pub-item">
+                <span class="pub-title"><a href="https://doi.org/10.1109/ICCAD66269.2025.11240774" target="_blank">Seeing Through Designs: Attention-Based Knowledge Transfer for Preference-Guided Microarchitecture Search</a></span>
+                <div class="pub-authors"><strong>Yiyang Zhao</strong>, Xuyang Zhao, Zhaori Bi, Ming Zhu, Qiwei Zhan, Keren Zhu, Fan Yang, Changhao Yan, Dian Zhou and Xuan Zeng</div>
+                <div class="pub-venue">2025 IEEE/ACM International Conference On Computer Aided Design (ICCAD)</div>
+                <div class="pub-tags"><span class="badge">CCF-B</span></div>
+            </li>
+            <li class="pub-item">
+                <span class="pub-title"><a href="https://doi.org/10.1109/DAC63849.2025.11132771" target="_blank">Look Before You Leap: A Self-Review Bayesian Optimization Method for Constrained High-Dimensional Design Space Exploration</a></span>
+                <div class="pub-authors">Xuyang Zhao*, <strong>Yiyang Zhao</strong>*, Zheng Wu, Tianning Gao, Zhaori Bi, Changhao Yan, Dian Zhou and Xuan Zeng</div>
+                <div class="pub-venue">2025 62nd ACM/IEEE Design Automation Conference (DAC)</div>
+                <div class="pub-tags"><span class="badge">CCF-A</span></div>
+                <div class="pub-note">* Equal contribution</div>
+            </li>
+            <li class="pub-item">
+                <span class="pub-title"><a href="https://doi.org/10.1109/ISEDA62518.2024.10617902" target="_blank">HD-MCTS: an Analog Circuit Optimization Algorithm Based on High-dimensional Monte Carlo Tree Search</a></span>
+                <div class="pub-authors"><strong>Yiyang Zhao</strong>, Lemeng Li, Ruiyu Lyv, Zhaori Bi, Changhao Yan and Xuan Zeng</div>
+                <div class="pub-venue">2024 2nd International Symposium of Electronics Design Automation (ISEDA)</div>
+                <div class="pub-tags"><span class="badge badge-award">Best Paper Award</span></div>
+            </li>
+        </ul>
+
+        <h2 id="awards">Selected Awards and Honors</h2>
+        <ul>
+            <li>Best Paper Award, 2nd International Symposium of Electronics Design Automation (ISEDA), 2024</li>
+            <li>Outstanding Graduate Student, Wuhan University, 2023</li>
+            <li>FiberHome Enterprise Special Scholarship, Wuhan University, 2023</li>
+        </ul>
+
+        <h2 id="services">Academic Services</h2>
+        <ul>
+            <li><span class="service-item">Reviewer, <em>ACM Transactions on Design Automation of Electronic Systems (TODAES)</em><span class="service-year">Since 2025</span></span></li>
+            <li><span class="service-item">Reviewer, <em>Integration, the VLSI Journal</em><span class="service-year">Since 2025</span></span></li>
+        </ul>
+
+        <h2 id="teaching">Teaching Services</h2>
+        <ul>
+            <li><span class="service-item">Teaching Assistant, <em>Fundamentals of Computer Software</em> (Instructor: Prof. Xuan Zeng)<span class="service-year">Since 2025</span></span></li>
+        </ul>
+    </main>
+
+</div>
+
+</body>
+</html>
